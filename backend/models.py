@@ -7,7 +7,7 @@ database_name = 'trivia'
 # database_path = 'postgresql://{}/{}'.format('localhost:5432', database_name)
 # database_path ='postgresql://LocNT26:020493@localhost:5432/trivia'
 
-database_path ='postgresql://oaramlyofmusaw:7c290c06a6123f951a59d56802b750bfcea955c2ea3b39e8d196354b157ad4a8@ec2-52-205-55-36.compute-1.amazonaws.com:5432/d7gg70ep5tqgiv'
+database_path ='postgresql://syiswlcuxohurl:b2075c5a57a115227996d20187493db16b8f8ee81482eb1ddf060fb2fb022d70@ec2-54-84-182-168.compute-1.amazonaws.com:5432/d1hbim44bvgesb'
 
 db = SQLAlchemy()
 
