@@ -188,3 +188,8 @@ def create_app(test_config=None):
         }), 405
 
     return app
+
+app = create_app()
+
+if __name__ == '__main__':
+    app.run()

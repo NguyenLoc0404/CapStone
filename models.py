@@ -5,7 +5,12 @@ from dotenv import load_dotenv
 import json
 
 database_name = 'trivia'
-database_path = f"postgresql://{os.getenv('USER')}:{os.getenv('PASSWORD')}@{os.getenv('HOST')}:{os.getenv('PORT')}/{os.getenv('DATABASE')}"
+# database_path = f"postgresql://{os.getenv('DATA_URL')}:{os.getenv('PASSWORD')}@{os.getenv('HOST')}:{os.getenv('PORT')}/{os.getenv('DATABASE')}"
+database_path = f"{os.getenv('DATA_URL')}"
+print('database_path',database_path)
+if database_path.startswith("postgres://"):
+  database_path = database_path.replace("postgres://", "postgresql://", 1)
+
 db = SQLAlchemy()
 
 """

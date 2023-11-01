@@ -1,0 +1,11 @@
+version: 1
+buildCommand: python manage.py db upgrade
+startCommand: python manage.py run
+database:
+  - type: postgres
+    version: 12
+    name: ${DATABASE}
+    username: ${USER}
+    password: ${PASSWORD}
+    script:
+      - psql -U ${USER} -d ${DATABASE} -a -f trivia.psql
