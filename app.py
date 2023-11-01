@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
 
-from models import setup_db, Question, Category
+from sqlalchemy import Integer
+from models import db_drop_and_create_all, setup_db, Question, Category
 
 QUESTIONS_PER_PAGE = 10
 
@@ -98,7 +99,7 @@ def create_app(test_config=None):
         if quiz_category['id'] == 0:
             questions = Question.query.order_by(Question.id).all()
         else:
-            questions = Question.query.filter(Question.category == quiz_category['id']).all()
+            questions = Question.query.filter(Question.category.cast(Integer) == quiz_category['id']).all()
             
         available_questions = [question.format() for question in questions]
         if questions is None:
@@ -146,7 +147,8 @@ def create_app(test_config=None):
                         })
     @app.route('/categories/<int:category_id>/questions', methods=['GET'])
     def get_questions_by_categories(category_id):
-        questions = Question.query.filter(Question.category == category_id).all()
+        questions = Question.query.filter(Question.category.cast(Integer) == int(category_id)).all()
+        print('questions',questions)
         if questions is None:
             abort(404)
         current_questions = paginate_questions(request,questions)
@@ -190,6 +192,8 @@ def create_app(test_config=None):
     return app
 
 app = create_app()
+with app.app_context():
+    db_drop_and_create_all()
 
 if __name__ == '__main__':
     app.run()
