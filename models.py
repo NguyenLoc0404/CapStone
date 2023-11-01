@@ -1,14 +1,11 @@
 import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 import json
 
 database_name = 'trivia'
-# database_path = 'postgresql://{}/{}'.format('localhost:5432', database_name)
-# database_path ='postgresql://LocNT26:020493@localhost:5432/trivia'
-
-database_path ='postgresql://syiswlcuxohurl:b2075c5a57a115227996d20187493db16b8f8ee81482eb1ddf060fb2fb022d70@ec2-54-84-182-168.compute-1.amazonaws.com:5432/d1hbim44bvgesb'
-
+database_path = f"postgresql://{os.getenv('USER')}:{os.getenv('PASSWORD')}@{os.getenv('HOST')}:{os.getenv('PORT')}/{os.getenv('DATABASE')}"
 db = SQLAlchemy()
 
 """
