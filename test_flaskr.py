@@ -7,7 +7,7 @@ from app import create_app
 from models import setup_db, Question, Category, db
 from unittest.mock import patch 
 from dotenv import load_dotenv
-database_path = f"{os.getenv('DATABASE_URL')}"
+database_path = os.getenv('DATABASE_URL')
 if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
 class TriviaTestCase(unittest.TestCase):
