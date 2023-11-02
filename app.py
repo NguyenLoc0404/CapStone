@@ -21,10 +21,11 @@ def paginate_questions(request, selection):
     current_questions = questions[start:end]
     return current_questions
 
-def create_app(test_config=None):
+def create_app(test=False):
     # create and configure the app
     app = Flask(__name__)
-    setup_db(app)
+    if not test:
+        setup_db(app)
 
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -37,7 +38,7 @@ def create_app(test_config=None):
         return response
     
     app.route('/', methods=['GET']
-              )(lambda: jsonify({'message': 'Hello end-user!'}))
+              )(lambda: jsonify({'message': 'Hello Friend!'}))
 
     @app.route('/questions', methods=['GET'])
     def get_questions():
@@ -75,11 +76,9 @@ def create_app(test_config=None):
     
     def create_question():
         body = request.get_json()
-        print('body',body)
         new_question = body.get('question',None)
         new_answer = body.get('answer',None)
         new_category = body.get('category',None)
-        print('new_category',new_category)
         new_difficulty = body.get('difficulty',None)
         try:
             question = Question(question=new_question, answer=new_answer, category=new_category, difficulty=new_difficulty)
@@ -97,12 +96,11 @@ def create_app(test_config=None):
 
 
     @app.route('/quizzes', methods=['POST'])
+    @requires_auth('post:quizzes')
     def get_questions_by_quizzes():
         body = request.get_json()
         quiz_category = body.get('quiz_category',None)
         previous_questions = body.get('previous_questions',[])
-        print('quiz_category',quiz_category)
-        print('previous_questions',previous_questions)
         if quiz_category['id'] == 0:
             questions = Question.query.order_by(Question.id).all()
         else:
@@ -116,7 +114,6 @@ def create_app(test_config=None):
             current_question = random.choice(available_questions)
         else:
             filtered_questions = [question for question in available_questions if question['id'] not in previous_questions]
-            print('filtered_questions',filtered_questions)
             if len(filtered_questions) != 0:
                 current_question = random.choice(filtered_questions)
             else:
@@ -154,9 +151,9 @@ def create_app(test_config=None):
                         'categories': formatted_categories
                         })
     @app.route('/categories/<int:category_id>/questions', methods=['GET'])
+    @requires_auth('get:categories-category_id-questions')
     def get_questions_by_categories(category_id):
         questions = Question.query.filter(Question.category.cast(Integer) == int(category_id)).all()
-        print('questions',questions)
         if questions is None:
             abort(404)
         current_questions = paginate_questions(request,questions)

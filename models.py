@@ -4,13 +4,20 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import json
 from logger import Logger
+load_dotenv()
 
+HOST_NAME = os.getenv("DATABASE_HOST")
+USER_NAME = os.getenv("DATABASE_USER")
+PASSWORD  = os.getenv("DATABASE_PASSWORD")
+database_name = os.getenv("DATABASE_NAME")
+database_path ="postgresql://{}:{}@{}/{}".format(USER_NAME, PASSWORD,HOST_NAME, database_name)
+
+print('database_path',database_path)
 logger = Logger.get_logger(__name__)
+# database_path = os.getenv('DATABASE_URL')
 
-database_path = os.getenv('DATABASE_URL')
-
-if database_path.startswith("postgres://"):
-  database_path = database_path.replace("postgres://", "postgresql://", 1)
+# if database_path is not None and database_path.startswith("postgres://"):
+#   database_path = database_path.replace("postgres://", "postgresql://", 1)
 
 db = SQLAlchemy()
 
@@ -20,7 +27,6 @@ setup_db(app)
 """
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    logger.info(f'Giá trị URL cơ sở dữ liệu: {app.config["SQLALCHEMY_DATABASE_URI"]}')
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     with app.app_context():
