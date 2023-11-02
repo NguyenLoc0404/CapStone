@@ -50,6 +50,18 @@ flask run
 
 URL backend: http://localhost:5000/
 
+## Test Backend
+```bash
+python test_api.py
+```
+It will run slow, please wait 1 minutes, because I connect Database from postgres of render
+Results:
+```
+.
+----------------------------------------------------------------------
+Ran 29 tests in 8.607s
+
+```
 
 ### Documentation
 ### API Reference
@@ -318,14 +330,15 @@ Fetch a pagination dictionary of questions
 ```
 
 
-## Testing
+## Frontend
+### Install Dependencies
+```
+cd frontend
+npm install
+```
 
-Write at least one test for the success and at least one error behavior of each endpoint using the unittest library.
-
-To deploy the tests, run
-
-```bash
-dropdb trivia_test
-createdb trivia_test
-python test_flaskr.py
+### Run Frontend Server
+```
+npm start
+```
 ```
