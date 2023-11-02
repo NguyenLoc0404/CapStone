@@ -7,6 +7,9 @@ import random
 from sqlalchemy import Integer
 from models import db_drop_and_create_all, setup_db, Question, Category
 from auth import AuthError, requires_auth, get_token_auth_header
+from logger import Logger
+
+logger = Logger.get_logger(__name__)
 
 QUESTIONS_PER_PAGE = 10
 

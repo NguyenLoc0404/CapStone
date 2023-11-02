@@ -3,6 +3,9 @@ from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import json
+from logger import Logger
+
+logger = Logger.get_logger(__name__)
 
 database_path = f"{os.getenv('DATA_URL')}"
 
@@ -17,6 +20,7 @@ setup_db(app)
 """
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    logger.info(f'Giá trị URL cơ sở dữ liệu: {app.config["SQLALCHEMY_DATABASE_URI"]}')
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     with app.app_context():
