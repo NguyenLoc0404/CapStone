@@ -152,7 +152,6 @@ def create_app(test=False):
         return jsonify({'success': True,
                         'categories': formatted_categories
                         })
-    
     @app.route('/categories/<int:category_id>/questions', methods=['GET'])
     @requires_auth('get:categories-category_id-questions')
     def get_questions_by_categories(category_id):
