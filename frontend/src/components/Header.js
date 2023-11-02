@@ -11,6 +11,7 @@ class Header extends Component {
       <div className='App-header'>
         <h1
           onClick={() => {
+            localStorage.clear();
             this.navTo('');
           }}
         >

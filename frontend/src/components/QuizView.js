@@ -43,6 +43,7 @@ class QuizView extends Component {
   };
 
   getNextQuestion = () => {
+    const token = localStorage.getItem('token');
     const previousQuestions = [...this.state.previousQuestions];
     if (this.state.currentQuestion.id) {
       previousQuestions.push(this.state.currentQuestion.id);
@@ -51,6 +52,9 @@ class QuizView extends Component {
     $.ajax({
       url: '/quizzes', //TODO: update request URL
       type: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify({

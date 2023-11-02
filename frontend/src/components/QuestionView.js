@@ -65,9 +65,13 @@ class QuestionView extends Component {
   }
 
   getByCategory = (id) => {
+    const token = localStorage.getItem('token');
     $.ajax({
       url: `/categories/${id}/questions`, //TODO: update request URL
       type: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
       success: (result) => {
         this.setState({
           questions: result.questions,
@@ -84,9 +88,13 @@ class QuestionView extends Component {
   };
 
   submitSearch = (searchTerm) => {
+    const token = localStorage.getItem('token');
     $.ajax({
       url: `/questions`, //TODO: update request URL
       type: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify({ searchTerm: searchTerm }),

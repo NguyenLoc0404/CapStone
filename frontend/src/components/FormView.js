@@ -31,10 +31,14 @@ class FormView extends Component {
   }
 
   submitQuestion = (event) => {
+    const token = localStorage.getItem('token');
     event.preventDefault();
     $.ajax({
       url: '/questions', //TODO: update request URL
       type: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
       dataType: 'json',
       contentType: 'application/json',
       data: JSON.stringify({
