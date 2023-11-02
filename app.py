@@ -54,6 +54,7 @@ def create_app(test=False):
                         })
     
     @app.route('/questions', methods=['POST'])
+    @requires_auth('post:questions')
     def get_questions_by_keyword():
         body = request.get_json()
         searchTerm = body.get('searchTerm',None)
@@ -95,9 +96,10 @@ def create_app(test=False):
             abort(422)
 
 
-    @app.route('/quizzes', methods=['POST'])
-    @requires_auth('post:quizzes')
+    @app.route('/quizzes', methods=['PATCH'])
+    @requires_auth('patch:quizzes')
     def get_questions_by_quizzes():
+        print('vo dday')
         body = request.get_json()
         quiz_category = body.get('quiz_category',None)
         previous_questions = body.get('previous_questions',[])

@@ -341,6 +341,7 @@ npm install
 ```bash
 npm start
 ```
+URL frontend: http://localhost:3000
 If Frontend has an error with loading the database, please reload the browser, i think the server is so slow, I connect with the Database of Render
 
 ## Deployment
