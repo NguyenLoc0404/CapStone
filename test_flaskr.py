@@ -6,8 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 from app import create_app
 from models import setup_db, Question, Category, db
 from unittest.mock import patch 
-
-
+from dotenv import load_dotenv
+database_path = f"{os.getenv('DATA_URL')}"
+if database_path.startswith("postgres://"):
+  database_path = database_path.replace("postgres://", "postgresql://", 1)
 class TriviaTestCase(unittest.TestCase):
     """This class represents the trivia test case"""
 
@@ -15,9 +17,7 @@ class TriviaTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = "trivia_test"
-        # self.database_path = "postgres://{}/{}".format('localhost:5432', self.database_name)
-        self.database_path = 'postgresql://LocNT26:020493@localhost:5432/trivia'
+        self.database_path = database_path
         setup_db(self.app, self.database_path)
 
         self.new_question = {

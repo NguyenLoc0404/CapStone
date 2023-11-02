@@ -6,6 +6,7 @@ import random
 
 from sqlalchemy import Integer
 from models import db_drop_and_create_all, setup_db, Question, Category
+from auth import AuthError, requires_auth, get_token_auth_header
 
 QUESTIONS_PER_PAGE = 10
 
@@ -31,6 +32,9 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods',
                              'GET,PATCH,POST,DELETE,OPTIONS')
         return response
+    
+    app.route('/', methods=['GET']
+              )(lambda: jsonify({'message': 'Hello end-user!'}))
 
     @app.route('/questions', methods=['GET'])
     def get_questions():
@@ -124,6 +128,7 @@ def create_app(test_config=None):
                         })
     
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
+    @requires_auth('delete:questions')
     def delete_question(question_id):
         question = Question.query.filter(Question.id == question_id).one_or_none()
         if question is None:
@@ -157,6 +162,14 @@ def create_app(test_config=None):
                         'total_questions': len(questions),
                         })
     
+
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "message": error.error['description']
+        }), error.status_code
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({

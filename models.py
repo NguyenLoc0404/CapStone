@@ -4,11 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import json
 
-database_name = 'trivia'
 database_path = f"{os.getenv('DATA_URL')}"
+
 if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
-print('database_path',database_path)
+
 db = SQLAlchemy()
 
 """
