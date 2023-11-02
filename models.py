@@ -7,7 +7,7 @@ from logger import Logger
 
 logger = Logger.get_logger(__name__)
 
-database_path = f"{os.getenv('DATA_URL')}"
+database_path = os.getenv('DATA_URL')
 
 if database_path.startswith("postgres://"):
   database_path = database_path.replace("postgres://", "postgresql://", 1)
