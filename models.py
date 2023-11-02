@@ -98,7 +98,6 @@ def db_drop_and_create_all():
  
 
 def insert_categories():
-    # Dữ liệu của các danh mục
     category_data = [
         'Science',
         'Art',
@@ -112,7 +111,6 @@ def insert_categories():
         new_category.insert()
 
 def insert_questions():
-    # Dữ liệu của các câu hỏi
     question_data = [
         ("Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?", "Maya Angelou", 4, 2),
         ("What boxer's original name is Cassius Clay?", "Muhammad Ali", 4, 1),
@@ -135,7 +133,6 @@ def insert_questions():
         ("Which dung beetle was worshipped by the ancient Egyptians?", "Scarab", 4, 4)
     ]
 
-    # Thêm dữ liệu vào bảng questions
     for question in question_data:
         new_question = Question(
             question=question[0],
