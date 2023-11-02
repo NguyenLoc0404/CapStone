@@ -338,7 +338,20 @@ npm install
 ```
 
 ### Run Frontend Server
-```
+```bash
 npm start
 ```
-```
+If Frontend has an error with loading the database, please reload the browser, i think the server is so slow, I connect with the Database of Render
+
+## Deployment
+![render_services](images//render_servers.png)
+
+### Postgres Database
+![render_postgres](images//render_postgres.png)
+
+Endpoint: `postgres://macos:Lvqb6jAbNSlbpFbsRkYPpcTeS0tHvR2U@dpg-cki2moke1qns73dbmfa0-a/drink_41ri`
+
+### Server
+![render_server](images//render_server.png)
+
+Endpoint Render: https://render-travia-app.onrender.com
