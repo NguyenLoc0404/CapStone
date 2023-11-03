@@ -40,9 +40,11 @@ psql trivia < trivia.psql
 ### Create Auth0 Roles and Users
 ![role](images//auth0_role.png)
 
-Client: [client_permisson](images//client_permisson.png)
+Client: 
+![client_permisson](images//client_permisson.png)
 
-Employee: [employee_permisson](images//employee_permisson.png)
+Employee: 
+![employee_permisson](images//employee_permisson.png)
 ### Run the Server
 
 From within the `./src` directory
@@ -183,7 +185,7 @@ Fetch a pagination dictionary of questions
     "total_questions": 22
 }
 
-`DELETE '/questions/<int:question_id>'`
+"DELETE '/questions/<int:question_id>'"
 
 - Delete an existing question
 - Request param: question_id:int
@@ -368,11 +370,11 @@ Endpoint: `postgres://macos:Lvqb6jAbNSlbpFbsRkYPpcTeS0tHvR2U@dpg-cki2moke1qns73d
 ![render_server](images//render_server.png)
 
 Endpoint Render: https://render-travia-app.onrender.com
-
-Token cilent 1
+- Token experience time: 24h
+- Token cilent 1
 `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IklFSkhReGhnY1BGZVFsRGRKN2R6eSJ9.eyJpc3MiOiJodHRwczovL2Rldi1pMWRicW9oMWs1c2wzdzQxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NTQ0NTM0MDdjNDAzZGRlNmEyNWYzMzEiLCJhdWQiOiJ0cmF2aWEiLCJpYXQiOjE2OTg5OTMzOTEsImV4cCI6MTY5OTA3OTc5MSwiYXpwIjoiZm83cVlTY0FrRU15SGVKaDUzV0pXajRxTW1YN2MzQ2YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDpjYXRlZ29yaWVzLWNhdGVnb3J5X2lkLXF1ZXN0aW9ucyIsInBhdGNoOnF1aXp6ZXMiLCJwb3N0OnF1ZXN0aW9ucyJdfQ.NoNvpHaagzTGdGTOsvgY_x2I_yzKWxlrN_RWSuZco9F6aiZJhBozywbaSO3Vampic3c2_eeaB3FOlHkrabEWV6u51pBPMc8qG2Xaz668nqGvFsiLY_RPE7s8igmNP5nsByCnMiQIFOw6zjLAjul70_3HOG44kLpwu-w6U_OnUIHVpKMDQqw-_PbXqU_OiTprt3g9F4vD_wCX1BTPry3yh-IcRGV3BaLSbz5CDDW25fKBusD_1xD2PxMZUvY0h3VZLAz_h4fDXgNujGo_oNeh3T35CLYWukfq2a0kbW9ZkNpokC7k2yHRMCueNQoTTLwxNcOIdWvVSTE_AC5es_aHAA`
 
-Token employee
+- Token employee
 `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IklFSkhReGhnY1BGZVFsRGRKN2R6eSJ9.eyJpc3MiOiJodHRwczovL2Rldi1pMWRicW9oMWs1c2wzdzQxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NTQ0MDIzMWNiYTJmZWEyNjE4ZTMzZDIiLCJhdWQiOiJ0cmF2aWEiLCJpYXQiOjE2OTg5OTM0MzYsImV4cCI6MTY5OTA3OTgzNiwiYXpwIjoiZm83cVlTY0FrRU15SGVKaDUzV0pXajRxTW1YN2MzQ2YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpxdWVzdGlvbnMiLCJnZXQ6Y2F0ZWdvcmllcy1jYXRlZ29yeV9pZC1xdWVzdGlvbnMiLCJwYXRjaDpxdWl6emVzIiwicG9zdDpxdWVzdGlvbnMiXX0.gwb5dX9G94Qbxkjk5xgxOclLo4KBmP0cujwpfeVr7Kla9V8QFJRKRIc152C3e7L7Tl_3wWGQlIEdYMHeN0rBiF-Y8GlhLU7N8jIDu127sgw7XeYk__ZpWT-0LLSpOIAk5wJkkjo8JbCOvT6NpBxJJuLhe-THm8eSVhbgOIoE_dODzkaC7cLaJu-IsqfOgSKB00CIjw0B8nicF9q-u2FwfGJPgQj82u-6vRbvk07RC82tykMkLMx4QVuU0ipIOr_bz3Uko8K-qV-oe1kkCPLwJEYKcE2P3LXsJGpf6GUGvHdOn8oW7M1jSUY08tP-n7PhTitl-d-rWWqYTriqeIes4w`
 
 ### Account manager:
@@ -382,5 +384,5 @@ Token employee
 - employee@gmail.com
 - Password@employee
 
--Link to get new token with login information :
+- Link to get new token with login information :
 https://dev-i1dbqoh1k5sl3w41.us.auth0.com/authorize?audience=travia&response_type=token&client_id=fo7qYScAkEMyHeJh53WJWj4qMmX7c3Cf&redirect_uri=https://localhost:8080/login-results
