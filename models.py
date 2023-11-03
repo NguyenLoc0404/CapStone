@@ -96,6 +96,7 @@ class Category(db.Model):
             }
     
 def db_drop_and_create_all():
+    # db.drop_all()
     db.create_all()
     if Category.query.first() is None:
         insert_categories()

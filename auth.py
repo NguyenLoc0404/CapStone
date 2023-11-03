@@ -1,6 +1,6 @@
 import json
 import os
-from flask import request, _request_ctx_stack
+from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
@@ -19,6 +19,12 @@ class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
+    def __repr__(self) -> str:
+        return f'AuthError({self.error}, {self.status_code})'
+    def __str__(self):
+        return f'Get {self.error}: {self.status_code}'
+
+
 
 
 ## Auth Header
@@ -76,10 +82,10 @@ def get_token_auth_header():
 # soruce : follow video of teacher in Udacity
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
-                    raise AuthError({
-                        'code': 'invalid_claims',
-                        'description': 'Permissions not included in JWT.'
-                    }, 400)
+        raise AuthError({
+            'code': 'invalid_claims',
+            'description': 'Permissions not included in JWT.'
+            }, 400)
 
     if permission not in payload['permissions']:
         raise AuthError({
@@ -152,7 +158,7 @@ def verify_decode_jwt(token):
     raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
-            }, 400)
+            }, 403)
 
 '''
 @TODO implement @requires_auth(permission) decorator method

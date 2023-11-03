@@ -6,7 +6,7 @@ import random
 
 from sqlalchemy import Integer
 from models import db_drop_and_create_all, setup_db, Question, Category
-from auth import AuthError, requires_auth, get_token_auth_header
+from auth import AuthError, requires_auth
 from logger import Logger
 
 logger = Logger.get_logger(__name__)
@@ -32,7 +32,7 @@ def create_app(test=False):
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
-                             'Content-Type,Authorization,true')
+                             'Content-Type,Authorization')
         response.headers.add('Access-Control-Allow-Methods',
                              'GET,PATCH,POST,DELETE,OPTIONS')
         return response
@@ -55,7 +55,7 @@ def create_app(test=False):
     
     @app.route('/questions', methods=['POST'])
     @requires_auth('post:questions')
-    def get_questions_by_keyword():
+    def get_questions_by_keyword(payload):
         body = request.get_json()
         searchTerm = body.get('searchTerm',None)
 
@@ -98,7 +98,7 @@ def create_app(test=False):
 
     @app.route('/quizzes', methods=['PATCH'])
     @requires_auth('patch:quizzes')
-    def get_questions_by_quizzes():
+    def get_questions_by_quizzes(payload):
         print('vo dday')
         body = request.get_json()
         quiz_category = body.get('quiz_category',None)
@@ -131,7 +131,7 @@ def create_app(test=False):
     
     @app.route('/questions/<int:question_id>', methods=['DELETE'])
     @requires_auth('delete:questions')
-    def delete_question(question_id):
+    def delete_question(payload,question_id):
         question = Question.query.filter(Question.id == question_id).one_or_none()
         if question is None:
             abort(404)
@@ -154,7 +154,7 @@ def create_app(test=False):
                         })
     @app.route('/categories/<int:category_id>/questions', methods=['GET'])
     @requires_auth('get:categories-category_id-questions')
-    def get_questions_by_categories(category_id):
+    def get_questions_by_categories(payload,category_id):
         questions = Question.query.filter(Question.category.cast(Integer) == int(category_id)).all()
         if questions is None:
             abort(404)
@@ -165,13 +165,6 @@ def create_app(test=False):
                         })
     
 
-    @app.errorhandler(AuthError)
-    def auth_error(error):
-        return jsonify({
-            "success": False,
-            "error": error.status_code,
-            "message": error.error['description']
-        }), error.status_code
     @app.errorhandler(404)
     def not_found(error):
         return jsonify({
@@ -180,6 +173,14 @@ def create_app(test=False):
             "message": "resource not found"
         }), 404
     
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "message": error.error['description']
+        }), error.status_code
+
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
