@@ -20,8 +20,13 @@ source myvenv/bin/activate
 With Postgres running, create a `trivia` database:
 
 ```bash
-dropdb trivia
 createdb trivia
+```
+Populate the database using the `trivia.psql` file provided
+
+```bash
+psql trivia < trivia.psql
+
 ```
 ![database](images//database.png)
 
@@ -37,7 +42,7 @@ createdb trivia
 
 Client: [client_permisson](images//client_permisson.png)
 
-Employee: [client_employee](images//client_employee.png)
+Employee: [employee_permisson](images//employee_permisson.png)
 ### Run the Server
 
 From within the `./src` directory
@@ -52,14 +57,16 @@ URL backend: http://localhost:5000/
 
 ## Test Backend
 ```bash
-python test_api.py
+dropdb trivia
+createdb trivia
+psql trivia_test < trivia.psql
+python test_flaskr.py
 ```
-It will run slow, please wait 1 minutes, because I connect Database from postgres of render
 Results:
 ```
 .
 ----------------------------------------------------------------------
-Ran 29 tests in 8.607s
+Ran 14 tests in 3.597s
 
 ```
 
@@ -329,20 +336,6 @@ Fetch a pagination dictionary of questions
 }
 ```
 
-
-## Frontend
-### Install Dependencies
-```
-cd frontend
-npm install
-```
-
-### Run Frontend Server
-```bash
-npm start
-```
-URL frontend: http://localhost:3000
-If Frontend has an error with loading the database, please reload the browser, i think the server is so slow, I connect with the Database of Render
 
 ## Deployment
 ![render_services](images//render_servers.png)

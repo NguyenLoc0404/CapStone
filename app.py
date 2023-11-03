@@ -99,7 +99,6 @@ def create_app(test=False):
     @app.route('/quizzes', methods=['PATCH'])
     @requires_auth('patch:quizzes')
     def get_questions_by_quizzes(payload):
-        print('vo dday')
         body = request.get_json()
         quiz_category = body.get('quiz_category',None)
         previous_questions = body.get('previous_questions',[])
