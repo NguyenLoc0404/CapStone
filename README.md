@@ -335,7 +335,26 @@ Fetch a pagination dictionary of questions
     "total_questions": 4
 }
 ```
+The API will return three error types when requests fail:
+- `400`: Bad Request
+- `401`: Unauthorized
+- `403`: Forbidden
+- `404`: Resource Not Found
+- `422`: Not Processable
+### Users and Roles
+`Public`
+- Can view all Questions and Categories
 
+`Cilent`
+- All permissions a Public user has and…
+- Can view questions by categories
+- Can play quizzes
+- Can search questions by keyword
+- Can Create new question
+
+`Employee`
+- All permissions a Cilent has and…
+- Can delete questions
 
 ## Deployment
 ![render_services](images//render_servers.png)
@@ -349,3 +368,19 @@ Endpoint: `postgres://macos:Lvqb6jAbNSlbpFbsRkYPpcTeS0tHvR2U@dpg-cki2moke1qns73d
 ![render_server](images//render_server.png)
 
 Endpoint Render: https://render-travia-app.onrender.com
+
+Token cilent 1
+`eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IklFSkhReGhnY1BGZVFsRGRKN2R6eSJ9.eyJpc3MiOiJodHRwczovL2Rldi1pMWRicW9oMWs1c2wzdzQxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NTQ0NTM0MDdjNDAzZGRlNmEyNWYzMzEiLCJhdWQiOiJ0cmF2aWEiLCJpYXQiOjE2OTg5NzY2MTAsImV4cCI6MTY5ODk4MzgxMCwiYXpwIjoiZm83cVlTY0FrRU15SGVKaDUzV0pXajRxTW1YN2MzQ2YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDpjYXRlZ29yaWVzLWNhdGVnb3J5X2lkLXF1ZXN0aW9ucyIsInBhdGNoOnF1aXp6ZXMiLCJwb3N0OnF1ZXN0aW9ucyJdfQ.Ev8H25ux3mdh5ob4RLEXutMncUiaIGjThxsVBgaI_FZDzddeNHYCEp5DNdEzRPnI6oKxeZGeOa5nP9N3RpPQ_gr8aP78NITGaWpG8aHxnTVJlk7qCx45FsPzHcdoCzaVkPFoYIpLECcGDzHq0PgTuJ1UfXPrs6fQhBhtYv5SwkUKcw4j8nAqPjNfIJgEojOaMVHvIY2FWolWdz51sCX8h5GEIYvPPOAC6m7CWCMIkDtme_htAZoc_I4qz7rewzO4PdMW-SACvdzr77zGgZXl3KWFTN1HPNLWtz5gJ83Goa41DYaUThkjE-r4pmPX33xMx9R0CLVvUQ_b8slWsha7Jg`
+
+Token employee
+`eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IklFSkhReGhnY1BGZVFsRGRKN2R6eSJ9.eyJpc3MiOiJodHRwczovL2Rldi1pMWRicW9oMWs1c2wzdzQxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NTQ0MDIzMWNiYTJmZWEyNjE4ZTMzZDIiLCJhdWQiOiJ0cmF2aWEiLCJpYXQiOjE2OTg5NzY3MTgsImV4cCI6MTY5ODk4MzkxOCwiYXpwIjoiZm83cVlTY0FrRU15SGVKaDUzV0pXajRxTW1YN2MzQ2YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpxdWVzdGlvbnMiLCJnZXQ6Y2F0ZWdvcmllcy1jYXRlZ29yeV9pZC1xdWVzdGlvbnMiLCJwYXRjaDpxdWl6emVzIiwicG9zdDpxdWVzdGlvbnMiXX0.LrntldV-i-4V5oh3ulv-gAVKJkKuDsyefIAEcuPDlB5b6Z2E-_pMYekjNpmcbZx4jzblnv2YMcWt6LkuPdYDABadjnLkhb6wuJzmAnNB385aTEBnfKQT5b0qsTWAGvq3aZ4SWdzSY67G-Kd_lTNrBThOHiPLvQ5hUKZLt7deWOP5cUPAmlNPmGorsIlkpNeG-P7f14OfWEh3fwfCftp5p3Pgh0VErg68OCubYwdWBq-gDQWmpg-13L4iTVm_YVe4gJgMy2GSVIY_fr-aOdySjd19ajgCDBJGKfhcecioArkVwwoJj5uzWYVeOEzlxO-94kfwWsqVIQqCsir3SfDtnQ`
+
+Account manager:
+client1@gmail.com
+Password@client1
+
+employee@gmail.com
+Password@employee
+
+Link to get new token:
+https://dev-i1dbqoh1k5sl3w41.us.auth0.com/authorize?audience=travia&response_type=token&client_id=fo7qYScAkEMyHeJh53WJWj4qMmX7c3Cf&redirect_uri=https://localhost:8080/login-results
